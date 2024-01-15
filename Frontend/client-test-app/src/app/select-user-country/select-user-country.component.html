@@ -1,0 +1,25 @@
+<form [formGroup]="detailsForm" (ngSubmit)="onSave()">
+  <div>
+    <label for="country">Country:</label>
+    <select id="country" formControlName="country" (change)="onCountryChange()">
+      <option value="">Select Country</option>
+      <option *ngFor="let country of countries" [value]="country.id">{{ country.name }}</option>
+    </select>
+    <div *ngIf="detailsForm.get('country')?.touched && detailsForm.get('country')?.errors">
+      <span *ngIf="detailsForm.get('country')?.errors?.['required']">Country is required field.</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="province">Province:</label>
+    <select id="province" formControlName="province">
+      <option value="">Select Province</option>
+      <option *ngFor="let province of provinces" [value]="province.id">{{ province.name }}</option>
+    </select>
+    <div *ngIf="detailsForm.get('province')?.touched && detailsForm.get('province')?.errors">
+      <span *ngIf="detailsForm.get('province')?.errors?.['required']">Province is required field.</span>
+    </div>
+  </div>
+
+  <button type="submit">Save</button>
+</form>

@@ -1,0 +1,37 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email">
+    <div *ngIf="registrationForm.get('email')?.touched || registrationForm.get('email')?.dirty">
+      <span *ngIf="registrationForm.get('email')?.errors?.['required']">Email is required.</span>
+      <span *ngIf="registrationForm.get('email')?.errors?.['email']">Please enter a valid email.</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" formControlName="password">
+    <div *ngIf="registrationForm.get('password')?.touched || registrationForm.get('password')?.dirty">
+      <span *ngIf="registrationForm.get('password')?.errors?.['required']">Password is required.</span>
+      <span *ngIf="registrationForm.get('password')?.errors?.['pattern']">Password must contain at least one letter and one number.</span>
+    </div>
+  </div>
+  <div>
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" formControlName="confirmPassword">
+    <div *ngIf="registrationForm.hasError('notSame') && (registrationForm.get('confirmPassword')?.touched || registrationForm.get('confirmPassword')?.dirty)">
+      <span>Passwords must match.</span>
+    </div>
+  </div>
+  <div>
+    <label>
+      <input type="checkbox" id="agreement" formControlName="agreement">
+      I agree to work for food
+    </label>
+    <div *ngIf="registrationForm.get('agreement')?.touched || registrationForm.get('agreement')?.dirty">
+      <span *ngIf="registrationForm.get('agreement')?.errors?.['required']">Agreement is required.</span>
+    </div>
+  </div>
+
+  <button mat-raised-button type="submit">Register</button>
+</form>
